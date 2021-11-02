@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FirstFragmentViewModel @Inject constructor(private val retrofit: Api) : ViewModel() {
+class QuestionsListFragmentViewModel @Inject constructor(private val retrofit: Api) : ViewModel() {
 
     val dataStateGetQuestion: LiveData<DataState<List<Question>>> get() = _dataStateGetQuestion
     private var _dataStateGetQuestion = MutableLiveData<DataState<List<Question>>>()

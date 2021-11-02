@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f2eef7"
-    tools:context=".ui.firstfragment.FirstFragment">
+    tools:context=".ui.firstfragment.QuestionsListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_movies"
-       android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -28,9 +28,10 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/send"
+        android:layout_marginStart="10dp"
+        android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
         />
 

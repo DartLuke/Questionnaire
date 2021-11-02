@@ -7,9 +7,8 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.danielpasser.questionnaire.ui.firstfragment.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first" >
+        android:name="com.danielpasser.questionnaire.ui.firstfragment.QuestionsListFragment"
+        tools:layout="@layout/fragment_question_list" >
 
     </fragment>
 

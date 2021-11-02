@@ -20,16 +20,16 @@ import com.danielpasser.questionnaire.utils.DataState
 
 
 @AndroidEntryPoint
-class FirstFragment : Fragment() {
+class QuestionsListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private val questionsAdapter = QuestionsAdapter()
-    private val viewModel: FirstFragmentViewModel by viewModels()
+    private val viewModel: QuestionsListFragmentViewModel by viewModels()
     private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_first, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_question_list, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,47 +41,43 @@ class FirstFragment : Fragment() {
     }
 
     private fun setupObservers() {
-      viewModel.dataStatesendAnswer.observe(viewLifecycleOwner, { dataState ->
+        viewModel.dataStatesendAnswer.observe(viewLifecycleOwner, { dataState ->
             when (dataState) {
                 is DataState.Success<Boolean> -> {
-                    Toast.makeText(context, "Answers were send", Toast.LENGTH_SHORT).show()
-                 viewModel.getQuestionsAgain()
+                    Toast.makeText(context, R.string.answers_were_sent, Toast.LENGTH_SHORT).show()
+                    viewModel.getQuestionsAgain()
                     showRecycleView(true)
                     showProgressBar(false)
                 }
                 is DataState.Error -> {
-                        showProgressBar(false)
-                        displayError(dataState.exception?.message)
+                    showProgressBar(false)
+                    displayError(dataState.exception?.message)
                 }
                 is DataState.Loading -> {
                     showProgressBar(true)
                 }
             }
-
         })
 
-
         viewModel.dataStateGetQuestion.observe(viewLifecycleOwner, { dataState ->
-                when (dataState) {
-                    is DataState.Success<List<Question>> -> {
-                        changeListViewData(dataState.data)
-                        showRecycleView(true)
-                        showProgressBar(false)
+            when (dataState) {
+                is DataState.Success<List<Question>> -> {
+                    changeListViewData(dataState.data)
+                    showRecycleView(true)
+                    showProgressBar(false)
 
-                    }
-                    is DataState.Error -> {
-                            showProgressBar(false)
-                            showRecycleView(false)
-                            displayError(dataState.exception?.message)
-                    }
-                    is DataState.Loading -> {
-                        showRecycleView(false)
-                        showProgressBar(true)
-                    }
                 }
-
-            })
-
+                is DataState.Error -> {
+                    showProgressBar(false)
+                    showRecycleView(false)
+                    displayError(dataState.exception?.message)
+                }
+                is DataState.Loading -> {
+                    showRecycleView(false)
+                    showProgressBar(true)
+                }
+            }
+        })
     }
 
     private fun displayError(message: String?) {
@@ -102,12 +98,12 @@ class FirstFragment : Fragment() {
 
         view.findViewById<Button>(R.id.button)
             .setOnClickListener {
-             val questions=   questionsAdapter.getQuestions()
-                if (questions==null)
-                    Toast.makeText(activity, "Answer all questions marked with *", Toast.LENGTH_LONG).show()
+                val questions = questionsAdapter.getQuestions()
+                if (questions == null)
+                    Toast.makeText(activity, R.string.not_all_answered, Toast.LENGTH_LONG).show()
                 else
-                viewModel.sendAnswer(questions)
-                 }
+                    viewModel.sendAnswer(questions)
+            }
 
     }
 
@@ -117,14 +113,14 @@ class FirstFragment : Fragment() {
         recyclerView.apply {
 
             layoutManager = LinearLayoutManager(view.context)
-               addItemDecoration(ItemDecorator(50))
+            addItemDecoration(ItemDecorator(50))
             adapter = questionsAdapter
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
                     if (!recyclerView.canScrollVertically(1)) {
                         viewModel.getQuestions()
                     }
+                   // super.onScrollStateChanged(recyclerView, newState)
                 }
             })
         }
