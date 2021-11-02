@@ -6,13 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.danielpasser.questionnaire.api.Api
+import com.danielpasser.questionnaire.model.AnswerBody
 import com.danielpasser.questionnaire.model.Question
 import com.danielpasser.questionnaire.model.QuestionResponse
 import com.danielpasser.questionnaire.utils.DataState
 import com.danielpasser.questionnaire.utils.Mapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,10 +29,10 @@ class FirstFragmentViewModel @Inject constructor(private val retrofit: Api) : Vi
     fun sendAnswer(question: List<Question>) {
 
         val answers = Mapper.questionsListToAnswersList(question)
-        viewModelScope.async(Dispatchers.IO) {
+        viewModelScope.launch (Dispatchers.IO) {
             try {
                 _dataStateSendAnswer.postValue(DataState.Loading)
-                retrofit.sendAnswers(answers)
+                retrofit.sendAnswers(AnswerBody(answers ))
                 _dataStateSendAnswer.postValue(DataState.Success(true))
 
             } catch (e: Exception) {
@@ -50,8 +51,8 @@ class FirstFragmentViewModel @Inject constructor(private val retrofit: Api) : Vi
 
     }
 
-    fun download() {
-        viewModelScope.async(Dispatchers.IO) {
+    fun getQuestions() {
+        viewModelScope.launch  (Dispatchers.IO) {
             try {
                 _dataStateGetQuestion.postValue(DataState.Loading)
                 questionsResponse =

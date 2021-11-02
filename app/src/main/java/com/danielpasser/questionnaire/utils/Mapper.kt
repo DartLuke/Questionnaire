@@ -7,7 +7,7 @@ import com.danielpasser.questionnaire.model.Question
 object Mapper {
 
     fun questionToAnswer(question: Question): Answer {
-        return Answer(question.id, question.answerText)
+        return Answer(question.id, question.questionText,question.answerText)
     }
 
     fun questionsListToAnswersList(questions: List<Question>): List<Answer> {

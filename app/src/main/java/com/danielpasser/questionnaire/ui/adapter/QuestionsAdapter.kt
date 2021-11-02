@@ -1,5 +1,6 @@
 package com.danielpasser.questionnaire.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -59,6 +60,7 @@ class QuestionsAdapter() : RecyclerView.Adapter<MyViewHolder>(),
     }
 
     override fun onDataChanged(question: Question, position: Int) {
+       Log.v("Test", question.toString())
         questions[position - 1] = question
     }
 
@@ -71,7 +73,7 @@ class QuestionsAdapter() : RecyclerView.Adapter<MyViewHolder>(),
 
     private fun allQuestionsAnswered(): Boolean {
         for (question in questions)
-            if (question.isAnswerNeed && question.answerText.isNullOrEmpty()) return false
+            if (question.isAnswerNeeded && question.answerText.isNullOrEmpty()) return false
         return true
     }
 

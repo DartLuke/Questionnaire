@@ -24,11 +24,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
-
                 android:layout_marginStart="@dimen/margin"
                 android:layout_marginTop="@dimen/margin"
+                android:padding="10dp"
                 android:background="@color/white">
 
                 <TextView
@@ -42,10 +41,11 @@
                     android:id="@+id/edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Your Answer"
+                    android:hint="@string/edit_text_hint"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_view_title"
-                   />
+                    android:autofillHints="@string/edit_text_hint"
+                    android:inputType="text" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>

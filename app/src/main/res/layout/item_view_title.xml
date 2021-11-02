@@ -26,27 +26,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin"
                 android:layout_marginTop="@dimen/margin"
+                android:padding="10dp"
                 android:background="@color/white">
 
                 <TextView
-                    android:id="@+id/text1"
+                    android:id="@+id/text0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="7dp"
-                    android:text="GOTech\nQuestionnere"
+                    android:text="@string/title_text0"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/text2"
+                    android:id="@+id/text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Show me what you got!"
+                    android:text="@string/title_text1"
                     android:layout_marginTop="10dp"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text1" />
+                    app:layout_constraintTop_toBottomOf="@id/text0" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -54,29 +55,21 @@
                     android:background="@color/border"
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text2"></LinearLayout>
+                    app:layout_constraintTop_toBottomOf="@id/text1" />
 
                 <TextView
                     android:layout_marginTop="20dp"
                  android:layout_marginBottom="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="*Required"
+                    android:text="@string/title_text2"
                     android:textColor="@color/red"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text2" />
+                    app:layout_constraintTop_toBottomOf="@id/text1" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/border"
-        android:layout_marginBottom="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toBottomOf="parent"></LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

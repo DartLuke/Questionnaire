@@ -37,7 +37,7 @@ class FirstFragment : Fragment() {
         setupUI(view)
         setupAdapter(view)
         setupObservers()
-        viewModel.download()
+        viewModel.getQuestions()
     }
 
     private fun setupObservers() {
@@ -50,10 +50,8 @@ class FirstFragment : Fragment() {
                     showProgressBar(false)
                 }
                 is DataState.Error -> {
-                    if (dataState != null) {
                         showProgressBar(false)
                         displayError(dataState.exception?.message)
-                    }
                 }
                 is DataState.Loading -> {
                     showProgressBar(true)
@@ -72,11 +70,9 @@ class FirstFragment : Fragment() {
 
                     }
                     is DataState.Error -> {
-                        if (dataState != null) {
                             showProgressBar(false)
                             showRecycleView(false)
                             displayError(dataState.exception?.message)
-                        }
                     }
                     is DataState.Loading -> {
                         showRecycleView(false)
@@ -123,6 +119,14 @@ class FirstFragment : Fragment() {
             layoutManager = LinearLayoutManager(view.context)
                addItemDecoration(ItemDecorator(50))
             adapter = questionsAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if (!recyclerView.canScrollVertically(1)) {
+                        viewModel.getQuestions()
+                    }
+                }
+            })
         }
     }
 

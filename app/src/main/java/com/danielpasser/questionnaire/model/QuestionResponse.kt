@@ -9,7 +9,7 @@ data class QuestionResponse(
     val questionText: String,
     val answerOptions: List<String>,
     val isLastEditText: Boolean,
-    val isAnswerNeed:Boolean,
+    val isAnswerNeeded:Boolean,
     )
 
 

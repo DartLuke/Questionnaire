@@ -1,6 +1,6 @@
 package com.danielpasser.questionnaire.api
 
-import com.danielpasser.questionnaire.model.Answer
+import com.danielpasser.questionnaire.model.AnswerBody
 import com.danielpasser.questionnaire.model.QuestionResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -13,7 +13,7 @@ interface Api {
     @POST("answers")
     suspend fun sendAnswers(
        
-        @Body answers: List<Answer>
+        @Body answers: AnswerBody
     )
     
 }

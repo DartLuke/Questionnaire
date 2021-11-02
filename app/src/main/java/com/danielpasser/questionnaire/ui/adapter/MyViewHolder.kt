@@ -34,10 +34,10 @@ sealed class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
             //fill radio group
             if (question.answerOptions != null) {
                 for (answer in question.answerOptions) {
-                    var rdbtn = RadioButton(itemView.context)
-                    rdbtn.id = View.generateViewId()
-                    rdbtn.text = answer
-                    radioGroup.addView(rdbtn)
+                    val radioButton = RadioButton(itemView.context)
+                    radioButton.id = View.generateViewId()
+                    radioButton.text = answer
+                    radioGroup.addView(radioButton)
                 }
             }
             //set selected item
@@ -101,14 +101,12 @@ sealed class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         private val onDataChangedListener: OnDataChangedListener
     ) : MyViewHolder(item) {
         fun bind(question: Question) {
-            itemView.findViewById<TextView>(R.id.text_view_title).text = question.questionText
+            setupTitle(question)
 
 
             val editText = itemView.findViewById<EditText>(R.id.edit_text)
-            editText.text.clear()
-
             ReflectionTextWatcher.removeAll(editText)
-
+            editText.text.clear()
             editText.setText(question.editText)
 
             editText.addTextChangedListener {
@@ -134,7 +132,7 @@ sealed class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         val title = itemView.findViewById<TextView>(R.id.text_view_title)
         title.text = question.questionText
 
-        if (question.isAnswerNeed) {
+        if (question.isAnswerNeeded) {
             val c = SpannableString("*")
             c.setSpan(
                 ForegroundColorSpan(Color.RED),
